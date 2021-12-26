@@ -1,8 +1,5 @@
-
-console.log(process.env)
 // API_KEY for maps api
-let API_KEY = process.env.MY_KEY; // Replace this value with your API key, Ex API_KEY = '245sdkh43k32k245m32k2324j5j'
-console.log(process.env)
+let API_KEY = config.MY_KEY; // Replace this value with your API key, Ex API_KEY = '245sdkh43k32k245m32k2324j5j'
 // Search for weather if 'search' button was clicked or ENTER button was pressed and field is not empty
 window.onload = function (){
   let input = document.getElementById("city-input");
@@ -60,11 +57,13 @@ currentLocationData = (position) => {
 showWeatherData = (weatherData) => {
   
   let iconElement = document.getElementById('weather-icon');
-  const iconName = weatherData.weather[0];
-  let srcURL = `icons/${iconName}.png`;
+  const iconName = weatherData.weather[0].icon;
+  //let srcURL = `icons/${iconName}.png`;
+  // ICON URL example: http://openweathermap.org/img/wn/10d@2x.png
+  let srcURL = `http://openweathermap.org/img/wn/${iconName}@2x.png`;
   let imgTag = `<img src=${srcURL}>`
   iconElement.innerHTML = imgTag;
-  console.log(weatherData);
+  //console.log(weatherData);
   document.getElementById('city-name').innerText = weatherData.name;
   document.getElementById('weather-type').innerText = weatherData.weather[0]['description'];
   document.getElementById('temp').innerText = weatherData.main.temp + " ";
